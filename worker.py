@@ -51,9 +51,9 @@ class Worker:
 
     def initializeZones(self):
         zone1 = zones()
-        zone1.initializeZone(41.371563, 2.152216, 0, 2000, "Work", ZoneTypes.WORK)
+        zone1.initializeZone(41.379827, 2.139626, 0, 2000, "Resetricted", ZoneTypes.RESTRICTED)
         zone2 = zones()
-        zone2.initializeZone(41.368520, 2.160378, 1, 2000, "Restricted", ZoneTypes.RESTRICTED)
+        zone2.initializeZone(41.364610, 2.153766, 1, 2000, "Work", ZoneTypes.WORK)
         zone3 = zones()
         zone3.initializeZone(41.372030, 2.150384, 2, 2000, "SwitchonTalks", ZoneTypes.RESTRICTED)
         
@@ -69,6 +69,8 @@ class Worker:
             for i in range(len(self._zones)):
                 zone_info = self._zones[i].getZoneInfo()
                 self._zones[i].clearDevices()
+                self._zones[i].setStatus(Status.STATUS_OK)
+
                 for j in range(len(self._devices)):
                     device_info = self._devices[j].getDeviceInfo()
                     device_nac = self._nac_client.devices.get(phone_number=device_info["phone"])
@@ -96,7 +98,7 @@ class Worker:
                             device_status = Status.STATUS_ALARM
                             
                             self._zones[i].addDevice(device_info["id"])
-                            
+                            self._zones[i].setStatus(Status.STATUS_ALARM)
                             if(device_info["obw"] == OBW.ENABLED):
                                 print("Skipping OBW already enabled")
                                 continue
@@ -124,8 +126,8 @@ class Worker:
                     
                     self._devices[j].setStatus(device_status)
                     
-                    #print(f'Zone {zone_info["name"]} = {result.result_type}')
-                    
+                    print(f'Zone {zone_info["name"]} = {result.result_type}')
+                print(f'Zone {zone_info["name"]} : {zone_info["status"]}')        
             time.sleep(2)
         print("Exiting main thread")
         self._thread_finished = True

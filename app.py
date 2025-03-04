@@ -49,5 +49,3 @@ def getDevicesStatus():
 signal.signal(signal.SIGINT, signalHandler)
 
 app.run()
-
-#56565
