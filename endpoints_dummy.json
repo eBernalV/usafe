@@ -1,0 +1,67 @@
+"posibles estados 0 ok - 1 alarma - 2 alerta 3 - offline"
+
+"/getZonesStatus [GET]"
+{
+    "Zone" :
+    {
+        "id" : 1234,
+        "status" : 1,
+        "boundaries" : {
+            "lat_max" : 123.12,
+            "lat_min" : 123.10,
+            "long_max" : 123.3,
+            "long_min" : 123.4
+        },
+        "devices" :
+        {
+            "id" : "123456",
+        }
+    },
+    "Zone" :
+    {
+        "id" : 1234,
+        "status" : 1,
+        "devices" :
+        {
+            "id" : "123456",
+        }
+    }
+}
+
+"/getOperatorStatus [GET]"
+{
+    "Operator" :
+    {
+        "id" : 123,
+        "status" : 1,
+        "location" : {
+            "lat" : 123.1,
+            "long" : 123.1
+        },
+
+        "devices" :
+        {
+            "id" : 1234,
+        }
+    }
+}
+
+"/getNumber/{id} [GET]"
+{
+    "id" : 123,
+    "number" : "+345215215"
+}
+
+"getDevicesStatus"
+{
+    "device" : {
+        "id" : 1234,
+        "status" : 1,
+        "location" : {
+            "lat" : 123.1,
+            "long" : 123.1
+        }
+    },
+}
+
+
